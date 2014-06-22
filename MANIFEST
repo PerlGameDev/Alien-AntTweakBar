@@ -1,3 +1,4 @@
 Build.PL
 lib/Alien/AntTweakBar.pm
+inc/pkg-config-generate.pl
 MANIFEST			This list of files
