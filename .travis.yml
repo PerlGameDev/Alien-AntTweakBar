@@ -1,4 +1,7 @@
 language: perl
+before_install:
+ - cpanm -v --notest Alien::Base
+
 install: cpanm -v --installdeps --notest .
 
 perl:
