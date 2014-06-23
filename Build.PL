@@ -29,21 +29,21 @@ my $builder = Alien::Base::ModuleBuild->new(
     add_to_cleanup      => [ 'Alien-AntTweakBar-*' ],
 
     alien_name => 'libanttweakbar',
-    # alien_repository => {
-    #     protocol => 'http',
-    #     host => 'downloads.sourceforge.net',
-    #     location => '/project/anttweakbar/',
-    #     exact_filename => 'AntTweakBar_116.zip',
-    # },
+    alien_repository => {
+        protocol => 'http',
+        host => 'downloads.sourceforge.net',
+        location => '/project/anttweakbar/',
+        exact_filename => 'AntTweakBar_116.zip',
+    },
 
     ## For development, to save the download time,
     ## download the package once and put it in an 'inc' directory.
-    alien_repository => {
-        protocol => 'local',
-        location => 'inc',
-        exact_filename => 'AntTweakBar_116.zip',
-        exact_version  => '1.16',
-    },
+    # alien_repository => {
+    #     protocol => 'local',
+    #     location => 'inc',
+    #     exact_filename => 'AntTweakBar_116.zip',
+    #     exact_version  => '1.16',
+    # },
     alien_build_commands => [
 #        $perlbin." $pkg_generator %p/libanttweakbar.pc %s $version",
         "patch -p1 < ../../inc/makefile-so-linking.patch",
