@@ -1,9 +1,12 @@
-#!perl
+use strict;
+use warnings;
 
 use Test::More tests => 1;
+use Alien::AntTweakBar;
 
-BEGIN {
-    use_ok( 'Alien::AntTweakBar' ) || print "Bail out!\n";
-}
+use Text::ParseWords qw/shellwords/;
 
-diag( "Testing Alien::AntTweakBar $Alien::AntTweakBar::VERSION, Perl $], $^X" );
+my @libs = shellwords( Alien::AntTweakBar->libs );
+
+my ($libname) = grep { s/^-l// } @libs;
+is( $libname, 'anttweakbar', 'idenitified needed library' );

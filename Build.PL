@@ -7,26 +7,24 @@ use Cwd;
 use Config;
 
 my $perlbin = $Config{perlpath};
-my $version = 0.01;
 
-my $pkg_generator = getcwd . "/inc/" . "pkg-config-generate.pl";
+#my $pkg_generator = getcwd . "/inc/" . "pkg-config-generate.pl";
 
 my $builder = Alien::Base::ModuleBuild->new(
     module_name         => 'Alien::AntTweakBar',
     license             => 'perl',
     dist_author         => q{basiliscos <dmol@gmx.com>},
-#    dist_version_from   => 'lib/Alien/AntTweakBar.pm',
+    dist_version_from   => 'lib/Alien/AntTweakBar.pm',
     configure_requires => {
         'Alien::Base' => 0,
         'Module::Build' => 0.38,
     },
-    build_requires => {
-        'Test::More' => 0,
-        'Alien::Base' => 0,
-    },
     requires => {
         'perl' => 5.006,
         'Alien::Base' => 0,
+    },
+    test_requires => {
+        'Test::More' => 0,
     },
     add_to_cleanup      => [ 'Alien-AntTweakBar-*' ],
 
@@ -44,19 +42,19 @@ my $builder = Alien::Base::ModuleBuild->new(
         protocol => 'local',
         location => 'inc',
         exact_filename => 'AntTweakBar_116.zip',
+        exact_version  => '1.16',
     },
     alien_build_commands => [
-        $perlbin." $pkg_generator %p/libanttweakbar.pc %s $version",
+#        $perlbin." $pkg_generator %p/libanttweakbar.pc %s $version",
+        "patch -p1 < ../../inc/makefile-so-linking.patch",
         'make -C "%p/src"',
     ],
     alien_install_commands => [
-        'install -D %p/lib/libAntTweakBar.so %s/lib/libAntTweakBar.so',
+        'install -D %p/lib/libanttweakbar.so %s/lib/libanttweakbar.so',
         'install -D %p/include/AntTweakBar.h %s/include/AntTweakBar.h',
-        'install -D %p/libanttweakbar.pc %s/lib/pkgconfig/libanttweakbar.pc',
+#        'install -D %p/libanttweakbar.pc %s/lib/pkgconfig/libanttweakbar.pc',
         $perlbin.' -e "use Alien::AntTweakBar; print Alien::AntTweakBar::VERSION"',
     ],
 );
-
-$builder->config_data->{version} = $version;
 
 $builder->create_build_script;
