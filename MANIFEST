@@ -1,4 +1,9 @@
 Build.PL
-lib/Alien/AntTweakBar.pm
+Changes
+inc/makefile-so-linking.patch
 inc/pkg-config-generate.pl
+lib/Alien/AntTweakBar.pm
+LICENSE
 MANIFEST			This list of files
+README.md
+t/00-load.t
