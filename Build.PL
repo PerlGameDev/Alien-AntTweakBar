@@ -10,6 +10,16 @@ use File::Spec::Functions;
 my $perlbin = $Config{perlpath};
 my $patch_location = catfile("..", "..", "inc", "makefile-so-linking.patch");
 
+system(qw/pkg-config --exists glu gl sdl/) == 0
+    or die("can't pkg-config failed: $?");
+if($? == -1){
+    die("can't pkg-config failed: $!")
+}elsif ($? & 127) {
+    die("pkg-config died with signal: " . ($? & 127));
+}elsif ($? >> 8 != 0){
+    die("pkg-config cannot find any of the following modules: glu gl sdl");
+}
+
 #my $pkg_generator = getcwd . "/inc/" . "pkg-config-generate.pl";
 
 my $builder = Alien::Base::ModuleBuild->new(
