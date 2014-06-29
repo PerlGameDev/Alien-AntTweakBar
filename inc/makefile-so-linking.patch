@@ -1,11 +1,16 @@
---- AntTweakBar.orig/src/Makefile	2014-06-23 21:35:26.823802547 +0300
-+++ AntTweakBar/src/Makefile	2014-06-24 00:35:24.407058542 +0300
-@@ -18,10 +18,10 @@
- CXX      	= gcc
+diff -ru AntTweakBar.orig/src/Makefile AntTweakBar/src/Makefile
+--- AntTweakBar.orig/src/Makefile	2014-06-29 11:44:07.149872539 +0300
++++ AntTweakBar/src/Makefile	2014-06-29 11:51:35.539235521 +0300
+@@ -15,13 +15,13 @@
+ #OUT_DIR	= ../lib/debug
+ 
+ 
+-CXX      	= gcc
++CXX      	= $(CXX)
  CXXFLAGS 	= $(CXXCFG) -Wall -fPIC -fno-strict-aliasing -D_UNIX -D__PLACEMENT_NEW_INLINE
  INCPATH  	= -I../include -I/usr/local/include -I/usr/X11R6/include -I/usr/include
 -LINK     	= gcc
-+LINK     	= g++
++LINK     	= $(CXX)
  #LIBS     	= -L/usr/X11R6/lib -L. -lglfw -lGL -lGLU -lX11 -lXxf86vm -lXext -lpthread -lm
  #LIBS     	= -L/usr/X11R6/lib -lGL -lX11 -lXxf86vm -lXext -lpthread -lm
 -LIBS 		=
