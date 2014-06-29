@@ -1,5 +1,6 @@
 language: perl
 before_install:
+ - sudo apt-get install -qq libsdl1.2-dev
  - cpanm -v --notest Alien::Base
 
 install: cpanm -v --installdeps --notest .
