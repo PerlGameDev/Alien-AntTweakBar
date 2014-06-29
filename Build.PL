@@ -18,7 +18,8 @@ for my $module (@required_pkg_modules) {
     } elsif ($? & 127) {
         die("pkg-config died with signal: " . ($? & 127));
     } elsif ($? >> 8 != 0) {
-        die("pkg-config cannot find the module: $module");
+        my $available_packages = `pkg-config --list-all`;
+        die("pkg-config cannot find the module $module among\n$available_packages");
     }
 }
 
