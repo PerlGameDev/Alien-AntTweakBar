@@ -5,8 +5,10 @@ use warnings;
 use Alien::Base::ModuleBuild;
 use Cwd;
 use Config;
+use File::Spec::Functions;
 
 my $perlbin = $Config{perlpath};
+my $patch_location = catfile("..", "..", "inc", "makefile-so-linking.patch");
 
 #my $pkg_generator = getcwd . "/inc/" . "pkg-config-generate.pl";
 
@@ -46,7 +48,7 @@ my $builder = Alien::Base::ModuleBuild->new(
     # },
     alien_build_commands => [
 #        $perlbin." $pkg_generator %p/libanttweakbar.pc %s $version",
-        "patch -p1 < ../../inc/makefile-so-linking.patch",
+        "patch -p1 < $patch_location",
         'make -C "%p/src"',
     ],
     alien_install_commands => [
