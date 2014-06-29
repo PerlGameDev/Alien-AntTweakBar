@@ -10,13 +10,16 @@ use File::Spec::Functions;
 my $perlbin = $Config{perlpath};
 my $patch_location = catfile("..", "..", "inc", "makefile-so-linking.patch");
 
-system(qw/pkg-config --exists glu gl sdl/);
-if($? == -1){
-    die("pkg-config failed: $!")
-}elsif ($? & 127) {
-    die("pkg-config died with signal: " . ($? & 127));
-}elsif ($? >> 8 != 0){
-    die("pkg-config cannot find any of the following modules: glu gl sdl");
+my @required_pkg_modules = qw/glu gl sdl/;
+for my $module (@required_pkg_modules) {
+    system(qw/pkg-config --exists/, $module);
+    if ($? == -1) {
+        die("pkg-config failed: $!")
+    } elsif ($? & 127) {
+        die("pkg-config died with signal: " . ($? & 127));
+    } elsif ($? >> 8 != 0) {
+        die("pkg-config cannot find the module: $module");
+    }
 }
 
 #my $pkg_generator = getcwd . "/inc/" . "pkg-config-generate.pl";
