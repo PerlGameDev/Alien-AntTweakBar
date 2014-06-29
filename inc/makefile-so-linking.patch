@@ -1,6 +1,6 @@
 diff -ru AntTweakBar.orig/src/Makefile AntTweakBar/src/Makefile
 --- AntTweakBar.orig/src/Makefile	2014-06-29 11:44:07.149872539 +0300
-+++ AntTweakBar/src/Makefile	2014-06-29 12:04:32.964461962 +0300
++++ AntTweakBar/src/Makefile	2014-06-29 12:08:35.597411653 +0300
 @@ -15,13 +15,12 @@
  #OUT_DIR	= ../lib/debug
  
@@ -35,7 +35,15 @@ diff -ru AntTweakBar.orig/src/Makefile AntTweakBar/src/Makefile
  
  .cpp.o:
  	@echo "===== Compile $< ====="
-@@ -83,7 +82,6 @@
+@@ -76,14 +75,13 @@
+ 
+ .c.o:
+ 	@echo "===== Compile $< ====="
+-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
++	$(CC) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+ 
+ clean:
+ 	@echo "===== Clean ====="
  	-$(DEL_FILE) *.o
  	-$(DEL_FILE) *~ core *.core *.stackdump
  
