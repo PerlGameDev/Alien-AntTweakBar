@@ -1,7 +1,6 @@
 Build.PL
 Changes
-inc/makefile-so-linking.patch
-inc/malloc_stdlib_h.patch
+inc/Makefile
 inc/pkg-config-generate.pl
 lib/Alien/AntTweakBar.pm
 LICENSE
