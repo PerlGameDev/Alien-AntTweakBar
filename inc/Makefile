@@ -39,7 +39,7 @@ NO_STDERR	= 2> /dev/null
 
 
 # name of the application:
-TARGET 		= anttweakbar
+TARGET 		= AntTweakBar
 
 # source files without extension:
 SRC_FILES	= TwColors.cpp TwFonts.cpp TwOpenGL.cpp TwOpenGLCore.cpp TwBar.cpp TwMgr.cpp TwPrecomp.cpp LoadOGL.cpp LoadOGLCore.cpp TwEventGLFW.c TwEventGLUT.c TwEventSDL.c TwEventSDL12.c TwEventSDL13.c TwEventSFML.cpp TwEventX11.c
