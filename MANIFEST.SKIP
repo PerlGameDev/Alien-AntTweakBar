@@ -71,9 +71,11 @@
 
 # Avoid archives of this distribution
 \bAlien-AntTweakBar-[\d\.\_]+
-inc/AntTweakBar_.+\.zip
+inc/AntTweakBar_*+\.zip
 _alien
 _build
 _share
 blib
 .travis.yml
+sharedir
+build_done
