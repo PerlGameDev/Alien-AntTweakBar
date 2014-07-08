@@ -11,7 +11,7 @@ use Config;
 use ExtUtils::Command;
 use File::chdir;
 use File::Basename;
-use File::Copy qw/move cp/;
+use File::Copy qw/move copy/;
 use File::Fetch;
 use File::Path qw/make_path/;
 use File::Spec::Functions qw(catfile rel2abs);
