@@ -3,7 +3,12 @@ use warnings;
 
 use lib "inc";
 
-my $package = 'My::Builder';
+#### we need the platform-specific module
+my %platforms =(
+    # Unix = default, thus not listing all UNIX like systems
+    MSWin32 => 'Windows',
+);
+my $package = 'My::Builder::' . ($platforms{$^O} || 'Unix');
 print "Gonna use '$package' class ...\n";
 eval "require $package" or die "Require '$package' failed: $@\n";
 
