@@ -41,46 +41,4 @@ sub config
   return $val;
 }
 
-sub import {
-  my $class = shift;
-
-  # return if $class->install_type('system');
-
-  # get a reference to %Alien::MyLibrary::AlienLoaded
-  # which contains names of already loaded libraries
-  # this logic may be replaced by investigating the DynaLoader arrays
-  my $loaded = do {
-    no strict 'refs';
-    no warnings 'once';
-    \%{ $class . "::AlienLoaded" };
-  };
-
-  my @libs = shellwords( $class->config('libs') );
-
-  my @L = grep { s/^-L// } @libs;
-  my @l = grep { /^-l/ } @libs;
-
-  push @DynaLoader::dl_library_path, @L;
-
-  my @libpaths;
-  foreach my $l (@l) {
-    next if $loaded->{$l};
-
-    my $path = DynaLoader::dl_findfile( $l );
-    unless ($path) {
-      carp "Could not resolve $l";
-      next;
-    }
-
-    push @libpaths, $path;
-    $loaded->{$l} = $path;
-  }
-
-  push @DynaLoader::dl_resolve_using, @libpaths;
-
-  my @librefs = map { DynaLoader::dl_load_file( $_, 0x01 ) } @libpaths;
-  push @DynaLoader::dl_librefs, @librefs;
-
-}
-
 1;
