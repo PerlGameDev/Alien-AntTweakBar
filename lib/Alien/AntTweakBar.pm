@@ -6,10 +6,8 @@ use warnings;
 
 use Carp;
 use Alien::AntTweakBar::ConfigData;
-use DynaLoader ();
 use File::ShareDir qw(dist_dir);
-use File::Spec::Functions qw(catdir catfile rel2abs);
-use Text::ParseWords qw/shellwords/;
+use File::Spec::Functions qw(catdir);
 
 =head1 NAME
 

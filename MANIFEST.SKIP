@@ -79,3 +79,4 @@ blib
 .travis.yml
 sharedir
 build_done
+download
