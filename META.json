@@ -28,6 +28,7 @@
             "File::ShareDir" : "0",
             "File::chdir" : "0.1008",
             "Module::Build" : "0",
+            "Text::Patch" : "0",
             "perl" : "5.008"
          }
       },
