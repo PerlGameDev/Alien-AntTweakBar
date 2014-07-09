@@ -31,6 +31,7 @@ my $builder = $package->new(
     'ExtUtils::CBuilder' => 0,
     'ExtUtils::Liblist'  => 0,
     'Module::Build'      => 0,
+	'Text::Patch'        => 0,
   },
   requires => {
       'perl'             => 5.008,

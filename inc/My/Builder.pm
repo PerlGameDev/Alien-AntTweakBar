@@ -14,6 +14,7 @@ use File::Path qw/make_path/;
 use File::Spec::Functions qw(catfile rel2abs);
 use File::Temp qw(tempdir tempfile);
 use File::ShareDir;
+use Text::Patch;
 
 sub ACTION_install {
   my $self = shift;
@@ -149,5 +150,43 @@ sub quote_literal {
   return $path;
 }
 
+# pure perl implementation of patch functionality
+sub apply_patch {
+  my ($self, $dir_to_be_patched, $patch_file) = @_;
+  my ($src, $diff);
+
+  undef local $/;
+  open(DAT, $patch_file) or die "###ERROR### Cannot open file: '$patch_file'\n";
+  $diff = <DAT>;
+  close(DAT);
+  $diff =~ s/\r\n/\n/g; #normalise newlines
+  $diff =~ s/\ndiff /\nSpLiTmArKeRdiff /g;
+  my @patches = split('SpLiTmArKeR', $diff);
+
+  print STDERR "Applying patch file: '$patch_file'\n";
+  foreach my $p (@patches) {
+    my ($k) = map{$_ =~ /\n---\s*([\S]+)/} $p;
+    # doing the same like -p1 for 'patch'
+    $k =~ s|\\|/|g;
+    $k =~ s|^[^/]*/(.*)$|$1|;
+    $k = catfile($dir_to_be_patched, $k);
+    print STDERR "- gonna patch '$k'\n" if $self->notes('build_debug_info');
+
+    open(SRC, $k) or die "###ERROR### Cannot open file: '$k'\n";
+    $src  = <SRC>;
+    close(SRC);
+    $src =~ s/\r\n/\n/g; #normalise newlines
+
+    my $out = eval { Text::Patch::patch( $src, $p, { STYLE => "Unified" } ) };
+    if ($out) {
+      open(OUT, ">", $k) or die "###ERROR### Cannot open file for writing: '$k'\n";
+      print(OUT $out);
+      close(OUT);
+    }
+    else {
+      warn "###WARN### Patching '$k' failed: $@";
+    }
+  }
+}
 
 1;
