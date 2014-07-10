@@ -3,9 +3,28 @@ package My::Builder::Unix;
 use strict;
 use warnings;
 
+use Devel::CheckLib;
 use File::Copy qw/move cp/;
 
 use base 'My::Builder';
+
+sub new {
+    my ($class, %args) = @_;
+    check_lib_or_exit(
+        header  => [
+            'X11/cursorfont.h',
+            'GL/glx.h',
+            'GL/gl.h',
+        ],
+        incpath => [
+            '/usr/local/include',
+            '/usr/X11R6/include',
+            '/usr/include'
+        ],
+    );
+    my $self = $class->SUPER::new(%args);
+    return $self;
+}
 
 sub prebuild {
     my $self = shift;
