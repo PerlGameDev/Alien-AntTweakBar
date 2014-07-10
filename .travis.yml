@@ -2,7 +2,7 @@ language: perl
 before_install:
  - sudo apt-get install update
  - sudo apt-get install --fix-missing unpdate
- - apt-get search libsdl
+ - apt-cache search libsdl
  - sudo apt-get install -qq libsdl1.2-dev
 
 install: cpanm -v --installdeps --notest .
