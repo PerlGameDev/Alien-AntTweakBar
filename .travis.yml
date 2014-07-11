@@ -1,10 +1,8 @@
 language: perl
 before_install:
  - sudo apt-get update
- - sudo apt-get --fix-missing update
- - apt-cache search libsdl
- - sudo apt-get upgrade
- - sudo apt-get install -qq libsdl1.2-dev
+ - sudo apt-get install libdbus
+ - sudo apt-get install libsdl1.2-dev
 
 install: cpanm -v --installdeps --notest .
 
