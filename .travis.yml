@@ -1,7 +1,8 @@
 language: perl
 before_install:
  - sudo apt-get update
- - sudo apt-get install libdbus
+ - apt-get search libdbus
+ - sudo apt-get install libdbus-1
  - sudo apt-get install libsdl1.2-dev
 
 install: cpanm -v --installdeps --notest .
