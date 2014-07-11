@@ -1,7 +1,7 @@
 language: perl
 before_install:
  - sudo apt-get update
- - apt-get search libdbus
+ - apt-cache search libdbus
  - sudo apt-get install libdbus-1
  - sudo apt-get install libsdl1.2-dev
 
