@@ -19,6 +19,22 @@ Version 0.02
 
 =cut
 
+=head1 AUTHOR
+
+Ivan Baidakou E<lt>dmol@(gmx.com)E<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2014 by Ivan Baidakou
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.20.0 or,
+at your option, any later version of Perl 5 you may have available.
+
+
+=cut
+
+
 our $VERSION = '0.02_10';
 
 sub config
