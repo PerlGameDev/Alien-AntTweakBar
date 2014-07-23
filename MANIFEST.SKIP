@@ -80,3 +80,4 @@ blib
 sharedir
 build_done
 download
+.prove
