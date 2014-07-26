@@ -11,7 +11,7 @@ use Digest::SHA qw(sha1_hex);
 use ExtUtils::Command;
 use File::chdir;
 use File::Basename;
-use File::Copy qw/move/;
+use File::Copy qw/copy/;
 use File::Fetch;
 use File::Path qw/make_path/;
 use File::Spec::Functions qw(catfile rel2abs);
@@ -243,7 +243,7 @@ sub preinstall_binaries {
     );
     while (my ($from, $to_dir) = each %intalled_files) {
         my $to = $to_dir . basename($from);
-        move($from, $to) or die("can't move $from -> $to: $!");
+        copy($from, $to) or die("can't copy $from -> $to: $!");
     }
 	return 1;
 }
