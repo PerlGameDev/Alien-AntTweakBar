@@ -197,7 +197,12 @@ sub build_binaries {
     print STDERR "Running make ...\n";
     {
         local $CWD = rel2abs( $self->notes('src_dir') );
-        $self->do_system($self->_get_make) or die "###ERROR### [$?] during make ... ";
+        #search PATH for c++ compiler
+        my $cxx = $self->search_env_path(qw/c++ g++ gpp aCC CC cxx cc++ cl FCC KCC RCC xlC_r xlC/);
+        my @cmd = ($self->_get_make);
+        push @cmd, "CXX=$cxx" if $cxx;
+        printf("(cmd: %s)\n", join(' ', @cmd));
+        $self->do_system(@cmd) or die "###ERROR### [$?] during make ... ";
     }
     return 1;
 }
@@ -230,6 +235,17 @@ sub _is_make {
     return 1;
   }
   return 0;
+}
+
+sub search_env_path {
+  my $self = shift;
+  my $sep = $Config{path_sep};
+  my $ext = $Config{exe_ext};
+  for my $exe (@_) {
+    for my $dir (split /\Q$sep\E/,$ENV{PATH}) {
+      return $exe if -x "$dir/$exe$ext";
+    }
+  }
 }
 
 sub preinstall_binaries {
