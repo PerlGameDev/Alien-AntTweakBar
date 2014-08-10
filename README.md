@@ -1,7 +1,8 @@
 p5-alien-anttweakbar
 ====================
 
-[![Build Status](https://travis-ci.org/basiliscos/p5-alien-anttweakbar.svg?branch=master)](https://travis-ci.org/basiliscos/p5-alien-anttweakbar)
+[![Build Status](https://travis-ci.org/PerlGameDev/Alien-AntTweakBar.svg?branch=master)](https://travis-ci.org/PerlGameDev/Alien-AntTweakBar)
+
 
 
 perl5 alien library for [AntTweakBar](http://anttweakbar.sourceforge.net), see
